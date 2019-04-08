@@ -1,7 +1,7 @@
 # change-object
-
-![Test](https://raw.githubusercontent.com/wbrickner/change-object/master/test/badges/tests.png) 
+ 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.png)](https://opensource.org/licenses/MIT)
+![Test](https://raw.githubusercontent.com/wbrickner/change-object/master/test/badges/tests.png)
 
 `change-object` provides an intuitive API to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
 
