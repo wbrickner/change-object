@@ -1,6 +1,6 @@
 {
   "name": "change-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Update objects using a declarative API. Inline imperative updates also available.",
   "main": "index.js",
   "scripts": {
