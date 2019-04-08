@@ -1,12 +1,12 @@
 const assert = require("assert")
-const updateObject = require("../")
+const changeObject = require("../")
 
 describe("Set Operations", () => {
     describe("Sets object properties", () => {
         it("Should set top-level properties", function () {
             const testObject = { propA: 0 }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { propA: 1 }
             })
 
@@ -19,7 +19,7 @@ describe("Set Operations", () => {
                 nested: { propA: 0 }
             }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { "nested->propA": 1 }
             })
 
@@ -32,7 +32,7 @@ describe("Set Operations", () => {
         it("Should set values at indices of top-level arrays", function () {
             const testArray = [0]
             
-            updateObject(testArray, {
+            changeObject(testArray, {
                 set: { 0: 1 }
             })
 
@@ -45,7 +45,7 @@ describe("Set Operations", () => {
                 nested: { arrayA: [0] }
             }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { "nested->arrayA->0": 1 }
             })
 
@@ -60,7 +60,7 @@ describe("Set Operations", () => {
                 enclosingArray: [{ propA: 0 }]
             }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { "enclosingArray->0->propA": 1 }
             })
 
@@ -77,7 +77,7 @@ describe("Set Operations", () => {
                 }
             }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { "nested->enclosingArray->0->propA": 1 }
             })
 

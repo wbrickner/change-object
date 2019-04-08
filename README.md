@@ -1,26 +1,26 @@
-# update-object
+# change-object
 
-![Test](https://raw.githubusercontent.com/wbrickner/update-object/master/test/badges/tests.svg) 
+![Test](https://raw.githubusercontent.com/wbrickner/change-object/master/test/badges/tests.svg) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.png)](https://opensource.org/licenses/MIT)
 
-`update-object` provides an intuitive API to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
+`change-object` provides an intuitive API to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
 
 # Installation
 
 ```shell
-$ npm install update-object
+$ npm install change-object
 ```
 
 # Usage
 
 ```javascript
-const updateObject = require("update-object")
+const changeObject = require("change-object")
 
 const myData = {
   friends: [{ name: "Jackson" }]
 }
 
-updateObject(myData, {
+changeObject(myData, {
   set: {
     likesJS: true,
     "friends.0.age": 19
@@ -49,7 +49,7 @@ Which results in the `myData` variable being modified:
 ### Nested Access Syntax
 
 If you'd like to modify a property nested within another object, this is simple.
-You use update-object's special nested access syntax.
+You use change-object's special nested access syntax.
 
 `topLevelProperty->child property->0->color`
 
@@ -78,7 +78,7 @@ The set operation sets the value of the given key (even nested keys) to the valu
 Example using simple and nested access syntax:
 
 ```javascript
-updateObject(myObject, {
+changeObject(myObject, {
   set: {
     myTopLevelBooleanBroperty: true,
     "topLevelObject->favoriteFood": "noodles"
@@ -93,7 +93,7 @@ The unset operation works exactly like the set operation, except that it removes
 Example using nested access syntax:
 
 ```javascript
-updateObject(myObject, {
+changeObject(myObject, {
   unset: {
     "topLevelObject->favoriteFood": "noodles"
   }
@@ -118,7 +118,7 @@ const myObject = {
 Insert some items:
 
 ```javascript
-updateObject(myObject, {
+changeObject(myObject, {
   insert: {
    onMyPhone: ["Wikipedia"],
    "inMyBag->electronics": ["External Drive"]
@@ -155,7 +155,7 @@ const myObject = {
 Let's remove some items:
 
 ```javascript
-updateObject(myObject, {
+changeObject(myObject, {
   remove: {
    onMyPhone: '(key, value) => (value === "Facebook")',
    "inMyBag->junk": (index, value) => (value.split("Broken").length != 0)
@@ -182,7 +182,7 @@ const plane = {
 Let's apply a mutation:
 
 ```javascript
-updateObject(plane, {
+changeObject(plane, {
   modify: {
    passengers: (passengers, parent) => {
      passengers.forEach(p => {

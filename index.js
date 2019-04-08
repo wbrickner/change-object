@@ -1,3 +1,10 @@
+// 
+//  change-object
+//  Written by Will Brickner
+//
+//  See README or LICENSE for more information.
+//
+
 const nestedAccessRegExp = new RegExp(/[\s\S]*->[\s\S]*/i)
 
 function findParentOfTerminalNode(object, pathComponents) {

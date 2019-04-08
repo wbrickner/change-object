@@ -1,12 +1,12 @@
 const assert = require("assert")
-const updateObject = require("../")
+const changeObject = require("../")
 
 describe("Insert Operations", () => {
     describe("Sets object properties", () => {
         it("Should set top-level properties", function () {
             const testObject = { propA: 0 }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { propA: 1 }
             })
 
@@ -19,7 +19,7 @@ describe("Insert Operations", () => {
                 nested: { propA: 0 }
             }
             
-            updateObject(testObject, {
+            changeObject(testObject, {
                 set: { "nested->propA": 1 }
             })
 

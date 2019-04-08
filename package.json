@@ -1,5 +1,5 @@
 {
-  "name": "update-object",
+  "name": "change-object",
   "version": "1.0.0",
   "description": "Update objects using a declarative API. Inline imperative updates also available.",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wbrickner/update-object.git"
+    "url": "git+https://github.com/wbrickner/change-object.git"
   },
   "keywords": [
     "update",
@@ -24,9 +24,9 @@
   "author": "Will Brickner",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wbrickner/update-object/issues"
+    "url": "https://github.com/wbrickner/change-object/issues"
   },
-  "homepage": "https://github.com/wbrickner/update-object#readme",
+  "homepage": "https://github.com/wbrickner/change-object#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
     "mocha": "^6.1.1",
