@@ -4,7 +4,7 @@
   "description": "Update objects using a declarative API. Inline imperative updates also available.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha && MOCHA_BADGE_GEN_FORMAT=svg MOCHA_BADGE_GEN_OUTPUT=./test/badges/tests.svg mocha --reporter mocha-badge-generator",
+    "test": "mocha && MOCHA_BADGE_GEN_FORMAT=png MOCHA_BADGE_GEN_OUTPUT=./test/badges/tests.png mocha --reporter mocha-badge-generator",
     "lint": "./node_modules/.bin/eslint index.js"
   },
   "repository": {
