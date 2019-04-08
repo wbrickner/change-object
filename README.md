@@ -141,7 +141,7 @@ This results in a modification of `myObject`:
 
 ## Remove Operation
 
-The remove operation conditionally removes properties or elements from `Objects` or `Arrays` respectively.  You provide a function (or a function string), which returns true when a property/element should be removed.
+The remove operation conditionally removes properties or elements from `Objects` or `Arrays` respectively.  You provide a function, which returns true when a property/element should be removed.
 
 Example using simple and nested syntax:
 
@@ -159,7 +159,7 @@ Let's remove some items:
 ```javascript
 changeObject(myObject, {
   remove: {
-   onMyPhone: '(key, value) => (value === "Facebook")',
+   onMyPhone: (key, value) => (value === "Facebook"),
    "inMyBag->junk": (index, value) => (value.split("Broken").length != 0)
   }
 })
@@ -168,7 +168,7 @@ changeObject(myObject, {
 ## Modify Operation
 
 This allows you to apply arbitrary modifications to parts of your object.
-You specify the part of your object you'd like to modify, and a function (or function string) which will modify the object.
+You specify the part of your object you'd like to modify, and a function which will modify the object.
 
 Let's see an example.
 
@@ -207,6 +207,10 @@ We find the object is now modified:
 }
 ```
 
+# Future features
+
+- Anywhere you pass a function, you should also be able to pass a function string.
+- The functions (or function strings) you provide should be able to be `async` functions, which will be automatically detected, and `changeObject( ... )` will return a promise.
 
 # License
 

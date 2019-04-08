@@ -84,15 +84,7 @@ function applyInsertionOperations(object, updateDescription) {
 function applyRemovalOperations(object, updateDescription) {
 	// remove items from array or object conditionally
 	for (var key in (updateDescription.remove || {})) {
-		let matchingFunction
-		if (typeof updateDescription.remove[key] === "function") {
-			matchingFunction = updateDescription.remove[key]
-		} else if (typeof updateDescription.remove[key] === "string") {
-			matchingFunction = new Function(updateDescription.remove[key])
-		} else {
-			// Matching function provided is neither a function or a function-string.  Skipping removal for key.
-			continue
-		}
+		if (typeof updateDescription.remove[key] !== "function") { continue }
 
 		// top-level properties take precedence over nested properties
 		if (!object.hasOwnProperty(key) && nestedAccessRegExp.test(key)) {
@@ -104,14 +96,14 @@ function applyRemovalOperations(object, updateDescription) {
 			// let's remove the elements that cannot stay
 			if (terminalNode instanceof Array) {
 				for (var j = 0, jlen = terminalNode.length; j < jlen; ++j) {
-					if (matchingFunction(j, terminalNode[j])) {
+					if (updateDescription.remove[key](j, terminalNode[j])) {
 						// delete this element, the matching function says it cannot stay
 						terminalNode.splice(j, 1)
 					}
 				}
 			} else if (terminalNode instanceof Object) {
 				for (var innerKey in terminalNode) {
-					if (matchingFunction(innerKey, terminalNode[innerKey])) {
+					if (updateDescription.remove[key](innerKey, terminalNode[innerKey])) {
 						// delete this element, the matching function says it cannot stay
 						delete terminalNode[innerKey]
 					}
@@ -121,14 +113,14 @@ function applyRemovalOperations(object, updateDescription) {
 			// let's remove the elements that cannot stay
 			if (object[key] instanceof Array) {
 				for (var j = 0, jlen = object[key].length; j < jlen; ++j) {
-					if (matchingFunction(j, object[key][j])) {
+					if (updateDescription.remove[key](j, object[key][j])) {
 						// delete this element (in place), the matching function says it cannot stay
 						object[key].splice(j, 1)
 					}
 				}
 			} else if (object[key] instanceof Object) {
 				for (var innerKey in object[key]) {
-					if (matchingFunction(innerKey, object[key][innerKey])) {
+					if (updateDescription.remove[key](innerKey, object[key][innerKey])) {
 						// delete this element, the matching function says it cannot stay
 						delete object[key][innerKey]
 					}
@@ -140,15 +132,7 @@ function applyRemovalOperations(object, updateDescription) {
 
 function applyModificationOperations(object, updateDescription) {
 	for (var key in (updateDescription.modify || {})) {
-		let modificationFunction
-		if (typeof updateDescription.modify[key] === "function") {
-			modificationFunction = updateDescription.modify[key]
-		} else if (typeof updateDescription.modify[key] === "string") {
-			modificationFunction = new Function(updateDescription.modify[key])
-		} else {
-			// Mutation function provided is neither a function or a function-string.  Skipping mutation for key.
-			continue
-		}
+		if (typeof updateDescription.remove[key] !== "function") { continue }
 
 		// top-level properties take precedence over nested properties
 		if (!object.hasOwnProperty(key) && nestedAccessRegExp.test(key)) {
@@ -157,9 +141,9 @@ function applyModificationOperations(object, updateDescription) {
 			let parentOfTerminalNode = findParentOfTerminalNode(object, components)
 			let terminalNode = parentOfTerminalNode[lastElement(components)]
 
-			modificationFunction(terminalNode, parentOfTerminalNode)
+			updateDescription.remove[key](terminalNode, parentOfTerminalNode)
 		} else {
-			modificationFunction(object[key], object)
+			updateDescription.remove[key](object[key], object)
 		}
 	}
 }
