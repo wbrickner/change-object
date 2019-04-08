@@ -1,6 +1,9 @@
 # update-object
 
-update-object provides an intuitive way to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
+![Test](test/badges/tests.png) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+`update-object` provides an intuitive API to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
 
 # Installation
 
