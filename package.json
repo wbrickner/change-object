@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha && MOCHA_BADGE_GEN_FORMAT=png MOCHA_BADGE_GEN_OUTPUT=./test/badges/tests.png mocha --reporter mocha-badge-generator",
-    "lint": "./node_modules/.bin/eslint index.js"
+    "lint": "./node_modules/.bin/eslint index.js",
+    "changelog": "./node_modules/.bin/auto-changelog --output ./CHANGELOG --commit-limit false",
+    "prepare-release": "npm test && npm run lint && npm run changelog"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
   },
   "homepage": "https://github.com/wbrickner/change-object#readme",
   "devDependencies": {
+    "auto-changelog": "^1.12.0",
     "eslint": "^5.16.0",
     "mocha": "^6.1.1",
     "mocha-badge-generator": "^0.2.2"

@@ -2,6 +2,8 @@
  
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.png)](https://opensource.org/licenses/MIT)
 ![Test](https://raw.githubusercontent.com/wbrickner/change-object/master/test/badges/tests.png)
+![Size](https://img.shields.io/bundlephobia/min/change-object.svg)
+![Issues](https://img.shields.io/github/issues-raw/wbrickner/change-object.svg)
 
 `change-object` provides an intuitive API to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
 
