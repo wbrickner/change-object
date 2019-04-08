@@ -1,8 +1,0 @@
-<testsuite name="Mocha Tests" tests="6" failures="0" errors="0" skipped="0" timestamp="Mon, 08 Apr 2019 09:15:36 GMT" time="0.008">
-<testcase classname="Set Operations Sets object properties" name="Should set top-level properties" time="0"/>
-<testcase classname="Set Operations Sets object properties" name="Should set nested properties" time="0.002"/>
-<testcase classname="Set Operations Sets values at array indices" name="Should set values at indices of top-level arrays" time="0"/>
-<testcase classname="Set Operations Sets values at array indices" name="Should set values at indices of nested arrays" time="0.001"/>
-<testcase classname="Set Operations Sets properties of objects inside arrays" name="Should set values at indices of top-level arrays" time="0"/>
-<testcase classname="Set Operations Sets properties of objects inside arrays" name="Should set values at indices of nested arrays" time="0"/>
-</testsuite>
