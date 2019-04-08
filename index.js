@@ -14,7 +14,7 @@ function findParentOfTerminalNode(object, pathComponents) {
 
 function lastElement(arr) { return arr[arr.length - 1] }
 
-function applySetters(object, updateDescription) {
+function applySetOperations(object, updateDescription) {
     for (var key in (updateDescription.set || {})) {
         // top-level properties take precedence over nested properties
         if (!object.hasOwnProperty(key) && nestedAccessRegExp.test(key)) {
@@ -30,7 +30,7 @@ function applySetters(object, updateDescription) {
     }
 }
 
-function applyUnsetters(object, updateDescription) {
+function applyUnsetOperations(object, updateDescription) {
     for (var key in (updateDescription.unset || {})) {
         // top-level properties take precedence over nested properties
         if (!object.hasOwnProperty(key) && nestedAccessRegExp.test(key)) {
@@ -131,13 +131,13 @@ function applyRemovalOperations(object, updateDescription) {
     }
 }
 
-function applyMutationOperations(object, updateDescription) {
-    for (var key in (updateDescription.mutate || {})) {
-        let mutationFunction
-        if (typeof updateDescription.mutate[key] === "function") {
-            mutationFunction = updateDescription.mutate[key]
-        } else if (typeof updateDescription.mutate[key] === "string") {
-            mutationFunction = new Function(updateDescription.mutate[key])
+function applyModificationOperations(object, updateDescription) {
+    for (var key in (updateDescription.modify || {})) {
+        let modificationFunction
+        if (typeof updateDescription.modify[key] === "function") {
+            modificationFunction = updateDescription.modify[key]
+        } else if (typeof updateDescription.modify[key] === "string") {
+            modificationFunction = new Function(updateDescription.modify[key])
         } else {
             console.warn(`Mutation function provided is neither a function or a function-string.  Skipping mutation for key "${key}".`)
             continue
@@ -150,17 +150,17 @@ function applyMutationOperations(object, updateDescription) {
             ,   parentOfTerminalNode = findParentOfTerminalNode(object, components)
             ,   terminalNode = parentOfTerminalNode[lastElement(components)]
 
-            mutationFunction(terminalNode, parentOfTerminalNode)
+            modificationFunction(terminalNode, parentOfTerminalNode)
         } else {
-            mutationFunction(object[key], object)
+            modificationFunction(object[key], object)
         }
     }
 }
 
 module.exports = function updateObject(object = {}, updateDescription = {}) {
-    applySetters(object, updateDescription)
-    applyUnsetters(object, updateDescription)
+    applySetOperations(object, updateDescription)
+    applyUnsetOperations(object, updateDescription)
     applyInsertionOperations(object, updateDescription)
     applyRemovalOperations(object, updateDescription)
-    applyMutationOperations(object, updateDescription)
+    applyModificationOperations(object, updateDescription)
 }

@@ -1,7 +1,7 @@
 # update-object
 
-![Test](test/badges/tests.png) 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Test](https://raw.githubusercontent.com/wbrickner/update-object/master/test/badges/tests.svg) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.png)](https://opensource.org/licenses/MIT)
 
 `update-object` provides an intuitive API to declaratively (or imperatively) update JavaScript objects, when you may not know their internal structure ahead of time.
 
@@ -102,15 +102,108 @@ updateObject(myObject, {
 
 ## Insert Operation
 
-TODO: Document this feature
+The insert operation adds elements to arrays.
+
+Example using simple and nested syntax:
+
+```javascript
+const myObject = {
+  onMyPhone: ["YouTube", "Facebook"],
+  inMyBag: {
+    electronics: ["Laptop"]
+  }
+}
+```
+
+Insert some items:
+
+```javascript
+updateObject(myObject, {
+  insert: {
+   onMyPhone: ["Wikipedia"],
+   "inMyBag->electronics": ["External Drive"]
+  }
+})
+```
+
+This results in a modification of `myObject`:
+
+```javascript
+{
+  onMyPhone: ["YouTube", "Wikipedia"],
+  inMyBag: {
+    electronics: ["Laptop", "External Drive"]
+  }
+}
+```
 
 ## Remove Operation
 
-TODO: Document this feature
+The remove operation conditionally removes properties or elements from `Objects` or `Arrays` respectively.  You provide a function (or a function string), which returns true when a property/element should be removed.
 
-## Mutation Operation
+Example using simple and nested syntax:
 
-TODO: Document this feature
+```javascript
+const myObject = {
+  onMyPhone: ["YouTube", "Facebook"],
+  inMyBag: {
+   junk: ["Broken Cable", "New Cable"]
+  }
+}
+```
+
+Let's remove some items:
+
+```javascript
+updateObject(myObject, {
+  remove: {
+   onMyPhone: '(key, value) => (value === "Facebook")',
+   "inMyBag->junk": (index, value) => (value.split("Broken").length != 0)
+  }
+})
+```
+
+## Modify Operation
+
+This allows you to apply arbitrary modifications to parts of your object.
+You specify the part of your object you'd like to modify, and a function (or function string) which will modify the object.
+
+Let's see an example.
+
+```javascript
+const plane = {
+  passengers: [
+    { name: "Jackson", annoying: false, money: 0 }, 
+    { name: "Peter",   annnoying: true, money: 0 }
+  ]
+}
+```
+
+Let's apply a mutation:
+
+```javascript
+updateObject(plane, {
+  modify: {
+   passengers: (passengers, parent) => {
+     passengers.forEach(p => {
+       if (p.annoying) { p.money -= 20 }
+       else { p.money += 20 }
+     })
+   }
+  }
+})
+```
+
+We find the object is now modified:
+
+```javascript
+{
+  passengers: [
+    { name: "Jackson", annoying: false, money: 20  }, 
+    { name: "Peter",   annnoying: true, money: -20 }
+  ]
+}
+```
 
 
 # License

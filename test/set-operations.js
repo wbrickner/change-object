@@ -69,5 +69,24 @@ describe("Set Operations", () => {
             })
             assert.equal(JSON.stringify(testObject), correctResult)
         })
+
+        it("Should set values at indices of nested arrays", function () {
+            const testObject = { 
+                nested: {
+                    enclosingArray: [{ propA: 0 }]
+                }
+            }
+            
+            updateObject(testObject, {
+                set: { "nested->enclosingArray->0->propA": 1 }
+            })
+
+            const correctResult = JSON.stringify({ 
+                nested: {
+                    enclosingArray: [{ propA: 1 }]
+                }
+            })
+            assert.equal(JSON.stringify(testObject), correctResult)
+        })
     })
 })  
