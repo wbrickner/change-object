@@ -1,5 +1,5 @@
 {
-  "name": "@digital-springboard/update-object",
+  "name": "update-object",
   "version": "1.0.0",
   "description": "Update objects using a declarative language, akin to MongoDB's update language.  Inline imperative updates also available.",
   "main": "index.js",
